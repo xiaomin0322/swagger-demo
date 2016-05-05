@@ -1,6 +1,7 @@
 package com.patterncat.controller;
 
 import com.patterncat.domain.User;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,13 +18,17 @@ public class UserController {
     private ConcurrentHashMap<String,User> userMap = new ConcurrentHashMap<>();
 
     @RequestMapping(method = RequestMethod.POST)
-    public String add(@RequestBody User user){
+    public String add(@RequestBody
+            @ApiParam(name = "user",value = "json format",required = true)
+                          User user){
         userMap.put(user.getId(),user);
         return "add successfully";
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public String update(@RequestBody User user) {
+    public String update(@RequestBody
+                             @ApiParam(name = "user",value = "json format",required = true)
+                             User user) {
         userMap.put(user.getId(),user);
         return "update successfully";
     }
